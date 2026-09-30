@@ -26,7 +26,7 @@ namespace ProductGrpc.Services
 
         public override Task<Empty> Test(Empty request, ServerCallContext context)
         {
-            return base.Test(request, context);
+            return Task.FromResult(new Empty());
         }
 
         public override async Task<ProductModel> GetProduct(GetProductRequest request, ServerCallContext context)

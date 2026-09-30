@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
@@ -14,7 +13,7 @@ namespace ProtoGrpcClient
         {
             // wait for grpc server is running
             Console.WriteLine("Waiting for server is running");
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
 
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new ProductProtoService.ProductProtoServiceClient(channel);
@@ -44,7 +43,7 @@ namespace ProtoGrpcClient
                 });
 
             Console.WriteLine("GetProductAsync Response: " + response.ToString());
-            Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
 
         private static async Task GetAllProductsAsync(ProductProtoService.ProductProtoServiceClient client)
@@ -59,7 +58,7 @@ namespace ProtoGrpcClient
             //        Console.WriteLine(currentProduct);
             //    }
             //}
-            //Thread.Sleep(1000);
+            //await Task.Delay(1000);
 
             // GetAllProducts with C# 8
             Console.WriteLine("GetAllProducts with C#8 started...");
@@ -68,7 +67,7 @@ namespace ProtoGrpcClient
             {
                 Console.WriteLine(responseData);
             }
-            Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
 
         private static async Task AddProductAsync(ProductProtoService.ProductProtoServiceClient client)
@@ -89,7 +88,7 @@ namespace ProtoGrpcClient
                 });
 
             Console.WriteLine("AddProduct Response: " + addProductResponse.ToString());
-            Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
 
         private static async Task UpdateProductAsync(ProductProtoService.ProductProtoServiceClient client)
@@ -111,7 +110,7 @@ namespace ProtoGrpcClient
                                  });
 
             Console.WriteLine("UpdateProductAsync Response: " + updateProductResponse.ToString());
-            Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
         private static async Task DeleteProductAsync(ProductProtoService.ProductProtoServiceClient client)
         {
@@ -124,7 +123,7 @@ namespace ProtoGrpcClient
                                  });
 
             Console.WriteLine("DeleteProductAsync Response: " + deleteProductResponse.Success.ToString());
-            Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
         private static async Task InsertBulkProduct(ProductProtoService.ProductProtoServiceClient client)
         {
@@ -149,7 +148,7 @@ namespace ProtoGrpcClient
 
             var responseBulk = await clientBulk;
             Console.WriteLine($"Status: {responseBulk.Success}. Insert Count: {responseBulk.InsertCount}");
-            Thread.Sleep(1000);
+            await Task.Delay(1000);
         }
     }
 }
