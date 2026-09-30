@@ -18,6 +18,7 @@ namespace ProductWorkerService
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton<ProductFactory>();
                     services.AddHostedService<Worker>();
                 });
     }
